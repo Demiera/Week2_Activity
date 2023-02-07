@@ -2,13 +2,31 @@
 {% block title %}Home{% endblock title %}
 
 {% block content %}
-    <h1>Welcome</h1>
-    {% for room in rooms %}
-        <hr/>
-        <span> @{{ room.host.username }}</span>
-        <p><a href="{% url 'room' room.id %}"> {{ room.name }} </a></p>
-        <small>{{ room.topic.name }}</small>
-        <hr/>
-    {% endfor %}
+<style>
+    .home-container{
+        display: grid;
+        grid-template-columns: 0.5fr 3fr 0.5fr;
 
+    }
+
+</style>
+
+<div class="home-container">
+
+    <div>
+        {% include 'base/topics_component.html' %}
+    </div>
+
+    <div>
+        <h5>{{ room_count }} rooms available </h5>
+        <hr/>
+        <a href="{% url 'create-room' %}">Create Room</a>
+        {% include 'base/feeds_component.html' %}
+    </div>
+
+    <div>
+        {% include 'base/activity_component.html' %}
+    </div>
+
+</div>
 {% endblock content %}
